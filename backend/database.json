@@ -1,0 +1,68 @@
+{
+  "habits": [
+    {
+      "id": 1,
+      "title": "Work 4 hours",
+      "daysDone": {
+        "2025-01-06": true,
+        "2025-08-11": true,
+        "2025-08-12": true,
+        "2025-08-14": true,
+        "2025-06-03": true,
+        "2025-06-04": false
+      }
+    },
+    {
+      "id": 2,
+      "title": "Go to sport",
+      "daysDone": {
+        "2025-08-11": true,
+        "2025-08-12": true,
+        "2025-08-14": true,
+        "2025-06-03": true,
+        "2025-06-04": false
+      }
+    },
+    {
+      "id": 3,
+      "title": "test",
+      "daysDone": {}
+    },
+    {
+      "id": 4,
+      "title": "test",
+      "daysDone": {
+        "2025-06-03": true
+      }
+    },
+    {
+      "id": 5,
+      "title": "test",
+      "daysDone": {
+        "2025-06-03": true
+      }
+    },
+    {
+      "id": 6,
+      "title": "Faire du sport",
+      "daysDone": {
+        "2025-06-03": true
+      }
+    },
+    {
+      "id": 7,
+      "title": "Faire du sport",
+      "daysDone": {}
+    },
+    {
+      "id": 8,
+      "title": "Faire du sport",
+      "daysDone": {}
+    },
+    {
+      "id": 9,
+      "title": "Faire du sport",
+      "daysDone": {}
+    }
+  ]
+}
