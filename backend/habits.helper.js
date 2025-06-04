@@ -100,11 +100,26 @@ const addHabit = async (title) => {
   await writeFile(newHabit);
 };
 
-const main = async () => {
+const deleteHabit = async (id) => {
+  checkDatabaseContent();
+
+  const habitIndex = databaseContent.habits.findIndex((h) => h.id === id);
+
+  if (habitIndex === -1) {
+    throw new Error(`Habitude avec l'ID ${id} non trouvée`);
+  }
+
+  databaseContent.habits.splice(habitIndex, 1);
+
+  const updatedContent = JSON.stringify(databaseContent, null, 2);
+  await writeFile(updatedContent);
+};
+
+/*const main = async () => {
   await getHabits();
   await getTodayHabits();
   await addHabit("Faire du sport");
   await updateHabit(6, true);
 };
 
-main();
+main();*/
