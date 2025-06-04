@@ -34,11 +34,15 @@ export async function habitsRoute(fastify) {
     const { done } = request.body;
 
     if (typeof done === "undefined") {
-      return reply.code(404).send({ error: '"done" est requis' });
+      return reply.code(400).send({ error: '"done" est requis' });
     }
 
-    await updateHabit(id, done);
-    return reply.send({ message: "Habitude mise à jour avec succès" });
+    try {
+      await updateHabit(parseInt(id), done);
+      return reply.send({ message: "Habitude mise à jour avec succès" });
+    } catch (error) {
+      return reply.code(404).send({ error: error.message });
+    }
   });
 
   // DELETE /habits/:id
@@ -46,7 +50,7 @@ export async function habitsRoute(fastify) {
     const { id } = request.params;
 
     try {
-      await deleteHabit(id);
+      await deleteHabit(parseInt(id));
       return reply.send({ message: "Habitude supprimée avec succès" });
     } catch (error) {
       return reply.code(404).send({ error: error.message });

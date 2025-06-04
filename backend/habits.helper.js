@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 
 const filePathDatabase = path.join(__dirname, "database.json");
 
-let databaseContent = [];
+let databaseContent = { habits: [] };
 const dateToday = new Date().toISOString().slice(0, 10);
 
 const loadDatabase = async () => {
@@ -17,40 +17,37 @@ const loadDatabase = async () => {
     console.log("Base de données chargée avec succès");
   } catch (err) {
     console.error("Erreur lors du chargement de la base de données:", err);
-    databaseContent = [];
+    databaseContent = { habits: [] };
   }
 };
 
 const checkDatabaseContent = async () => {
-  if (databaseContent.length === 0) {
-    await loadDatabase();
-  }
+  await loadDatabase();
 };
 
 const getHabits = async () => {
-  checkDatabaseContent();
-
+  await checkDatabaseContent();
   return databaseContent.habits;
 };
 
 const writeFile = async (content) => {
-  fs.writeFile(filePathDatabase, content, "utf8", (err) => {
-    if (err) {
-      console.error("Erreur lors de l'écriture du fichier :", err);
-    } else {
-      console.log("Fichier JSON écrit avec succès !");
-    }
-  });
+  try {
+    await fs.promises.writeFile(filePathDatabase, content, "utf8");
+    console.log("Fichier JSON écrit avec succès !");
+  } catch (err) {
+    console.error("Erreur lors de l'écriture du fichier :", err);
+    throw err;
+  }
 };
 
 const getTodayHabits = async () => {
-  checkDatabaseContent();
+  await checkDatabaseContent();
 
   const habitTrueToday = databaseContent.habits.map((habit) => {
     return {
       id: habit.id,
       title: habit.title,
-      isDoneToday: habit.daysDone[dateToday],
+      isDoneToday: habit.daysDone[dateToday] || false,
     };
   });
 
@@ -58,37 +55,33 @@ const getTodayHabits = async () => {
 };
 
 const updateHabit = async (id, done = false) => {
-  checkDatabaseContent();
+  await checkDatabaseContent();
 
-  const habit = databaseContent.habits.find((h) => h.id === id);
+  const habit = databaseContent.habits.find((h) => h.id === parseInt(id));
 
   if (!habit) {
-    console.error(`Habitude avec l'ID ${id} non trouvée`);
-    return;
+    throw new Error(`Habitude avec l'ID ${id} non trouvée`);
   }
 
-  if (done === true) {
-    habit.daysDone[dateToday] = true;
-  } else {
-    habit.daysDone[dateToday] = false;
-  }
-
-  console.log(databaseContent);
+  habit.daysDone[dateToday] = done;
 
   const updateDate = JSON.stringify(databaseContent, null, 2);
-
   await writeFile(updateDate);
+
+  return habit;
 };
 
 const addHabit = async (title) => {
-  checkDatabaseContent();
+  await checkDatabaseContent();
 
-  if (!databaseContent.habits) {
-    databaseContent.habits = [];
-  }
+  // Trouver le plus grand ID existant
+  const maxId = databaseContent.habits.reduce(
+    (max, habit) => (habit.id > max ? habit.id : max),
+    0
+  );
 
   const content = {
-    id: databaseContent.habits.length + 1,
+    id: maxId + 1,
     title: title,
     daysDone: {},
   };
@@ -96,24 +89,45 @@ const addHabit = async (title) => {
   databaseContent.habits.push(content);
 
   const newHabit = JSON.stringify(databaseContent, null, 2);
-
   await writeFile(newHabit);
+
+  return content;
 };
 
 const deleteHabit = async (id) => {
-  checkDatabaseContent();
+  await checkDatabaseContent();
+  const idNum = Number(id);
+  console.log(
+    "ID reçu pour suppression:",
+    id,
+    "(après conversion:",
+    idNum,
+    ")"
+  );
+  console.log(
+    "Liste des IDs existants:",
+    databaseContent.habits.map((h) => h.id)
+  );
 
-  const habitIndex = databaseContent.habits.findIndex((h) => h.id === id);
+  // On compare toujours en nombre pour éviter les soucis de type
+  const habitIndex = databaseContent.habits.findIndex(
+    (h) => Number(h.id) === idNum
+  );
 
   if (habitIndex === -1) {
     throw new Error(`Habitude avec l'ID ${id} non trouvée`);
   }
 
+  const deletedHabit = databaseContent.habits[habitIndex];
   databaseContent.habits.splice(habitIndex, 1);
 
   const updatedContent = JSON.stringify(databaseContent, null, 2);
   await writeFile(updatedContent);
+
+  return deletedHabit;
 };
+
+export { getHabits, getTodayHabits, updateHabit, addHabit, deleteHabit };
 
 /*const main = async () => {
   await getHabits();
