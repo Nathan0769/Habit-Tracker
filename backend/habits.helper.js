@@ -74,7 +74,6 @@ const updateHabit = async (id, done = false) => {
 const addHabit = async (title) => {
   await checkDatabaseContent();
 
-  // Trouver le plus grand ID existant
   const maxId = databaseContent.habits.reduce(
     (max, habit) => (habit.id > max ? habit.id : max),
     0

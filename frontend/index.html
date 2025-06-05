@@ -1,14 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <h1>Habit Tracker</h1>
-    <div id="app"></div>
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" href="./src/output.css" />
     <script type="module" src="/src/main.js"></script>
+  </head>
+
+  <body
+    class="min-h-screen min-w-[320px] m-0 flex items-center justify-center bg-white text-black font-sans"
+  >
+    <div
+      id="app"
+      class="max-w-[1280px] mx-auto p-8 text-center flex flex-col items-center gap-5"
+    >
+      <div id="title">
+        <h1 class="text-[3.2em] leading-[1.1] font-bold">
+          Habitude à faire aujourd'hui !
+        </h1>
+      </div>
+
+      <div
+        id="today-habits"
+        class="flex flex-col items-center justify-center gap-4"
+      >
+        <p id="loading" class="text-gray-600">Chargement...</p>
+      </div>
+
+      <!-- Bouton : Ajouter une habitude -->
+      <button
+        id="add-new-habit"
+        class="rounded-lg border border-transparent px-5 py-2 text-base font-medium bg-gray-100 text-black hover:border-[#646cff] transition-colors"
+      >
+        Ajouter une nouvelle habitude
+      </button>
+
+      <!-- Dialog : Ajouter une habitude -->
+      <dialog id="add-new-habit-dialog">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-[90%] max-w-md">
+          <form id="add-new-habit-form" class="flex flex-col">
+            <h2 class="text-xl font-semibold mb-8">
+              Ajouter une nouvelle habitude
+            </h2>
+            <input
+              id="input-add"
+              type="text"
+              name="name"
+              placeholder="Nom de la habitude"
+              class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#646cff] mb-8"
+              required
+            />
+            <div class="flex justify-end gap-4 mt-8">
+              <button
+                id="add-new"
+                type="submit"
+                class="px-4 py-2 bg-gray-100 rounded-lg hover:border hover:border-[#646cff] transition"
+              >
+                Ajouter
+              </button>
+              <button
+                id="close-dialog"
+                type="button"
+                class="px-4 py-2 bg-gray-100 rounded-lg hover:border hover:border-[#646cff] transition"
+              >
+                Fermer
+              </button>
+            </div>
+          </form>
+        </div>
+      </dialog>
+
+      <!-- Bouton : Historique -->
+      <button
+        id="open-history"
+        class="rounded-lg border border-transparent px-5 py-2 text-base font-medium bg-gray-100 text-black hover:border-[#646cff] transition-colors"
+      >
+        Voir l'historique
+      </button>
+
+      <!-- Dialog : Historique -->
+      <dialog id="history-dialog">
+        <div
+          class="bg-white rounded-lg shadow-lg p-6 w-[90%] max-w-lg flex flex-col gap-4 justify-center items-center"
+        >
+          <h2 class="text-xl font-semibold mb-4">Historique</h2>
+          <div class="overflow-auto max-h-96">
+            <table
+              class="min-w-full table-auto border-collapse border border-gray-200"
+            >
+              <thead>
+                <tr class="bg-gray-100">
+                  <th
+                    class="border border-gray-300 px-4 py-2 text-left font-bold"
+                  >
+                    Date
+                  </th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="flex justify-end mt-4">
+            <button
+              id="close-history"
+              class="px-4 py-2 bg-gray-100 rounded-lg hover:border hover:border-[#646cff] transition"
+            >
+              Fermer
+            </button>
+          </div>
+        </div>
+      </dialog>
+    </div>
   </body>
 </html>

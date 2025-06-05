@@ -34,12 +34,14 @@ export async function habitsRoute(fastify) {
     const { done } = request.body;
 
     if (typeof done === "undefined") {
-      return reply.code(400).send({ error: '"done" est requis' });
+      return reply.code(400).send({ error: "done est requis" });
     }
 
     try {
       await updateHabit(parseInt(id), done);
-      return reply.send({ message: "Habitude mise à jour avec succès" });
+      return reply
+        .send({ message: "Habitude mise à jour avec succès" })
+        .code(200);
     } catch (error) {
       return reply.code(404).send({ error: error.message });
     }
