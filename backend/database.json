@@ -2,7 +2,7 @@
   "habits": [
     {
       "id": 1,
-      "title": "Work 4 hours",
+      "title": "Travailler 4 heures",
       "daysDone": {
         "2025-01-06": true,
         "2025-08-11": true,
@@ -10,7 +10,8 @@
         "2025-08-14": true,
         "2025-06-03": true,
         "2025-06-04": false,
-        "2025-06-05": true
+        "2025-06-05": true,
+        "2025-06-06": true
       }
     },
     {
@@ -18,7 +19,8 @@
       "title": "Faire du sport",
       "daysDone": {
         "2025-06-04": false,
-        "2025-06-05": false
+        "2025-06-05": false,
+        "2025-06-06": false
       }
     },
     {
@@ -26,14 +28,16 @@
       "title": "Boire 3L d'eau",
       "daysDone": {
         "2025-06-04": false,
-        "2025-06-05": true
+        "2025-06-05": true,
+        "2025-06-06": true
       }
     },
     {
       "id": 4,
       "title": "Manger 5 fruits",
       "daysDone": {
-        "2025-06-05": false
+        "2025-06-05": false,
+        "2025-06-06": true
       }
     }
   ]

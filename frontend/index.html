@@ -86,30 +86,21 @@
           class="bg-white rounded-lg shadow-lg p-6 w-[90%] max-w-lg flex flex-col gap-4 justify-center items-center"
         >
           <h2 class="text-xl font-semibold mb-4">Historique</h2>
-          <div class="overflow-auto max-h-96">
+          <div class="overflow-auto max-h-96 w-full">
             <table
+              id="table-history"
               class="min-w-full table-auto border-collapse border border-gray-200"
             >
-              <thead>
-                <tr class="bg-gray-100">
-                  <th
-                    class="border border-gray-300 px-4 py-2 text-left font-bold"
-                  >
-                    Date
-                  </th>
-                </tr>
-              </thead>
-              <tbody></tbody>
+              <thead id="thead-history"></thead>
+              <tbody id="tbody-history"></tbody>
             </table>
           </div>
-          <div class="flex justify-end mt-4">
-            <button
-              id="close-history"
-              class="px-4 py-2 bg-gray-100 rounded-lg hover:border hover:border-[#646cff] transition"
-            >
-              Fermer
-            </button>
-          </div>
+          <button
+            id="close-history"
+            class="px-4 py-2 bg-gray-100 rounded-lg hover:border hover:border-[#646cff] transition mt-8"
+          >
+            Fermer
+          </button>
         </div>
       </dialog>
     </div>

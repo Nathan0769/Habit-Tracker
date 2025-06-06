@@ -30,11 +30,105 @@ class History {
 
     buttonHistory.addEventListener("click", () => {
       dialogHistory.showModal();
+      this.render();
     });
 
     closeHistory.addEventListener("click", () => {
       dialogHistory.close();
     });
+  }
+
+  render() {
+    fetch("http://localhost:3000/habits/")
+      .then((response) => response.json())
+      .then((habits) => {
+        console.log(habits);
+        const minDate = this.startDate(habits);
+        const rangeDates = this.dateRange(minDate);
+        this.tableHistory(habits, rangeDates);
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la récupération des habitudes", error);
+      });
+  }
+
+  startDate(habits) {
+    const dates = {};
+
+    habits.forEach((habit) => {
+      dates[habit.id] = habit.daysDone;
+    });
+
+    const allDates = Object.values(dates).flatMap((innerObj) =>
+      Object.keys(innerObj)
+    );
+    const minDate = new Date(Math.min(...allDates.map((d) => new Date(d))));
+
+    const dateFormatted = minDate.toISOString().slice(0, 10);
+
+    return dateFormatted;
+  }
+
+  dateRange(minDate) {
+    const dateToday = new Date();
+    const rangeDates = [];
+
+    for (
+      let d = new Date(minDate);
+      d <= dateToday;
+      d.setDate(d.getDate() + 1)
+    ) {
+      rangeDates.push(new Date(d).toISOString().slice(0, 10));
+    }
+
+    return rangeDates.reverse();
+  }
+
+  tableHistory(habits, dateRange) {
+    const table = document.querySelector("#table-history");
+    const tabHeaders = document.querySelector("#thead-history");
+    const tbody = document.querySelector("#tbody-history");
+    tabHeaders.innerHTML = "";
+    tbody.innerHTML = "";
+
+    // conteneur pour le défilement horizontal
+    const scrollContainer = document.createElement("div");
+    scrollContainer.classList.add("scroll-container");
+
+    const headerRow = document.createElement("tr");
+
+    const habitHeader = document.createElement("th");
+    habitHeader.textContent = "Habit";
+    habitHeader.classList.add("habit-header");
+    headerRow.appendChild(habitHeader);
+
+    dateRange.forEach((date) => {
+      const dateHeader = document.createElement("th");
+      dateHeader.textContent = date;
+      headerRow.appendChild(dateHeader);
+    });
+    tabHeaders.appendChild(headerRow);
+
+    habits.forEach((habit) => {
+      const row = document.createElement("tr");
+
+      const habitCell = document.createElement("td");
+      habitCell.textContent = habit.title;
+      habitCell.classList.add("habit-cell");
+      row.appendChild(habitCell);
+
+      dateRange.forEach((date) => {
+        const dateCell = document.createElement("td");
+        const isDone = habit.daysDone[date] === true;
+        dateCell.textContent = isDone ? "✅" : "❌";
+        row.appendChild(dateCell);
+      });
+
+      tbody.appendChild(row);
+    });
+
+    table.parentNode.insertBefore(scrollContainer, table);
+    scrollContainer.appendChild(table);
   }
 }
 
