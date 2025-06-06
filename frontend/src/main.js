@@ -1,4 +1,5 @@
 import "./input.css";
+import API_CONFIG from "./config.js";
 
 class NewHabit {
   constructor() {}
@@ -39,7 +40,7 @@ class History {
   }
 
   render() {
-    fetch("http://localhost:3000/habits/")
+    fetch(`${API_CONFIG.BASE_URL}/habits/`)
       .then((response) => response.json())
       .then((habits) => {
         console.log(habits);
@@ -157,7 +158,7 @@ class AddHabit {
   }
 
   toggleNewHabit(title) {
-    fetch(`http://localhost:3000/habits`, {
+    fetch(`${API_CONFIG.BASE_URL}/habits`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -167,7 +168,7 @@ class AddHabit {
       .then((response) => response.json())
       .then((data) => {
         console.log("Nouvelle habitude ajoutée", data);
-        return fetch("http://localhost:3000/habits/today");
+        return fetch(`${API_CONFIG.BASE_URL}/habits/today`);
       })
       .then((response) => response.json())
       .then((habits) => {
@@ -219,7 +220,7 @@ class TodayHabit {
   }
 
   toggleHabitStatus(habitId, status) {
-    fetch(`http://localhost:3000/habits/${habitId}`, {
+    fetch(`${API_CONFIG.BASE_URL}/habits/${habitId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -237,7 +238,7 @@ class TodayHabit {
   }
 
   habits() {
-    fetch("http://localhost:3000/habits/today")
+    fetch(`${API_CONFIG.BASE_URL}/habits/today`)
       .then((response) => response.json())
       .then((habits) => {
         this.removeLoading();
