@@ -16,7 +16,9 @@ await fastify.register(habitsRoute, { prefix: "/habits" });
 
 // Run the server!
 try {
-  await fastify.listen({ port: 3000 });
+  // ⚠️ CHANGEMENT ICI : utiliser le port de Render
+  const port = process.env.PORT || 3000;
+  await fastify.listen({ port, host: "0.0.0.0" });
 } catch (err) {
   fastify.log.error(err);
   process.exit(1);
