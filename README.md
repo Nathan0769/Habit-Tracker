@@ -51,23 +51,23 @@ Une application web moderne pour suivre vos habitudes quotidiennes avec une arch
 
 ## 🧠 Techniques utilisées
 
-- **[ES6 Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)** pour une architecture orientée objet (`TodayHabit`, `History`, `AddHabit`)
-- **[HTML Dialog Element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog)** pour les modales natives sans bibliothèque
-- **[Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)** avec gestion d'erreurs pour la communication client-serveur
-- **[ES6 Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)** avec import/export pour la modularité
-- **[Array Methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** avancées (`map()`, `find()`, `reduce()`, `forEach()`)
-- **[Promises Chain](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)** pour les opérations asynchrones séquentielles
-- **[Dynamic DOM Manipulation](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)** pour la création d'éléments en temps réel
+- **ES6 Classes** pour une architecture orientée objet (`TodayHabit`, `History`, `AddHabit`)
+- **HTML Dialog Element** pour les modales natives sans bibliothèque
+- **Fetch API** avec gestion d'erreurs pour la communication client-serveur
+- **ES6 Modules** avec import/export pour la modularité
+- **Array Methods** avancées (`map()`, `find()`, `reduce()`, `forEach()`)
+- **Promises Chain** pour les opérations asynchrones séquentielles
+- **Dynamic DOM Manipulation** pour la création d'éléments en temps réel
 - **Node.js fs.promises** pour la manipulation asynchrone de fichiers JSON
 
 ## 🛠️ Technologies utilisées
 
-- ⚡ **[Fastify](https://www.fastify.io/)** — Framework web performant pour Node.js
-- 🔄 **[@fastify/cors](https://github.com/fastify/fastify-cors)** — Middleware CORS pour requêtes cross-origin
-- ⚡ **[Vite](https://vitejs.dev/)** — Build tool moderne avec rechargement à chaud
-- 🎨 **[Tailwind CSS](https://tailwindcss.com/)** — Framework CSS utility-first
-- ☁️ **[Render](https://render.com/)** — Déploiement cloud avec variables d'environnement
-- 🟨 **JavaScript ES6+** — Classes, modules, async/await, manipulation DOM
+- ⚡ **Fastify** — Framework web pour Node.js
+- 🔄 **@fastify/cors** — Middleware CORS pour requêtes cross-origin
+- ⚡ **Vite** — Build tool
+- 🎨 **Tailwind CSS** — Framework CSS utility-first
+- ☁️ **Render** — Déploiement cloud avec variables d'environnement
+- 🟨 **JavaScript** — Classes, modules, async/await, manipulation DOM
 - 📄 **HTML5** — Éléments sémantiques et Dialog API
 - 🗃️ **JSON** — Base de données fichier pour simplicité de déploiement
 
