@@ -66,7 +66,7 @@ Une application web moderne pour suivre vos habitudes quotidiennes avec une arch
 - 🔄 **@fastify/cors** — Middleware CORS pour requêtes cross-origin
 - ⚡ **Vite** — Build tool
 - 🎨 **Tailwind CSS** — Framework CSS utility-first
-- ☁️ **Render** — Déploiement cloud avec variables d'environnement
+- ☁️ **Render** — Déploiement cloud
 - 🟨 **JavaScript** — Classes, modules, async/await, manipulation DOM
 - 📄 **HTML5** — Éléments sémantiques et Dialog API
 - 🗃️ **JSON** — Base de données fichier pour simplicité de déploiement
