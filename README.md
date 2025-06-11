@@ -49,7 +49,7 @@ Une application web moderne pour suivre vos habitudes quotidiennes avec une arch
 - **`/frontend/src`** : code JavaScript modulaire en classes + styles Tailwind
 - **`/frontend/public`** : assets statiques servis par Vite
 
-## 🧠 Techniques utilisées
+## 🛠️ Techniques utilisées
 
 - **ES6 Classes** pour une architecture orientée objet (`TodayHabit`, `History`, `AddHabit`)
 - **HTML Dialog Element** pour les modales natives sans bibliothèque
